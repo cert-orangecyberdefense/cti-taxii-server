@@ -4,9 +4,15 @@ import logging
 from medallion import set_config, application_instance, register_blueprints
 from medallion.scripts.run import _get_argparser
 
-log = logging.getLogger("medallion")
+LOG_FILE = 'app.log'
 
 if __name__ == "__main__":
+    logging.basicConfig(filename=LOG_FILE,
+                        filemode='a',
+                        format='%(name)s %(levelname)s %(message)s',
+                        level=logging.INFO)
+    log = logging.getLogger("medallion")
+
     log.info("Setting up medaillon in uwsgi mode")
     medallion_parser = _get_argparser()
     medallion_args = medallion_parser.parse_args()
