@@ -26,15 +26,9 @@ jobs:
       run: |
         pip install -U pip setuptools
         pip install tox-gh-actions
-        pip install codecov
     - name: Create test user
       run: |
         mongo admin --eval 'db.createUser({user:"travis",pwd:"test",roles:[{role:"root",db:"admin"}]});'
     - name: Test with Tox
       run: |
         tox
-    - name: Upload coverage information to Codecov
-      uses: codecov/codecov-action@v1
-      with:
-        fail_ci_if_error: true # optional (default = false)
-        verbose: true # optional (default = false)
