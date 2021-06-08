@@ -1,7 +1,7 @@
 import json
 import logging
 
-from medallion import set_config, application_instance, register_blueprints
+from medallion import application_instance, register_blueprints, set_config
 from medallion.scripts.run import _get_argparser
 
 LOG_FILE = 'app.log'
