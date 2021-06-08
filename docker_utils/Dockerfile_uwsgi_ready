@@ -1,0 +1,18 @@
+FROM python:alpine
+
+# Install uwsgi requirements
+RUN apk add --no-cache build-base linux-headers pcre-dev
+
+COPY . /opt/taxii
+COPY ./docker_utils/*.json /opt/taxii
+
+WORKDIR /opt/taxii
+RUN pip install --upgrade pip setuptools \
+    && pip install pymongo \
+    && pip install uwsgi \
+    && pip install .
+
+
+RUN chown -R 1001:1001 /opt/taxii
+
+USER 1001
